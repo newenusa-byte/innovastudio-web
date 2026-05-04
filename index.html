@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InnovaStudio — Agencia Digital para Clínicas y Negocios en Chile</title>
+<meta name="description" content="Creamos sitios web profesionales que convierten visitas en clientes. Agencia digital en Castro, Chiloé. Diseño, SEO y automatización.">
+<meta name="keywords" content="agencia digital Chile, diseño web Castro, sitio web clínica dental, página web profesional Chile, SEO Chile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ════════════════════════════════════════════
+   TOKENS
+════════════════════════════════════════════ */
+:root {
+  /* ── Fondos claros */
+  --black:   #F8FAFF;   /* body — blanco con toque azul    */
+  --black2:  #EEF2FF;   /* sección alterna — índigo pálido */
+  --black3:  #E0E7FF;   /* hover suave                     */
+
+  /* ── Acento tecnológico: azul índigo eléctrico */
+  --lime:    #4F46E5;   /* índigo principal                */
+  --lime2:   #4338CA;   /* índigo hover                    */
+  --lime-dim:#EEF2FF;   /* fondo acento muy suave          */
+
+  /* ── Texto */
+  --white:   #0F172A;   /* slate oscuro — texto principal  */
+  --white2:  #334155;   /* slate medio                     */
+  --gray:    #64748B;   /* texto muted                     */
+  --gray2:   #94A3B8;   /* texto apagado                   */
+
+  /* ── Bordes sutiles azulados */
+  --border:  rgba(79,70,229,.12);
+  --border2: rgba(15,23,42,.07);
+
+  --ff:   'Outfit', system-ui, sans-serif;
+  --ffd:  'Playfair Display', Georgia, serif;
+  --mono: 'DM Mono', monospace;
+
+  --r:   12px;
+  --r2:  20px;
+  --sh:  0 2px 12px rgba(79,70,229,.08), 0 8px 28px rgba(15,23,42,.07);
+  --sh2: 0 8px 40px rgba(79,70,229,.14);
+  --ease: cubic-bezier(.4,0,.2,1);
+  --t:   all .28s var(--ease);
+}
+
+/* ════════════════════════════════════════════
+   RESET + BASE
+════════════════════════════════════════════ */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html { scroll-behavior:smooth; font-size:16px }
+body {
+  font-family: var(--ff);
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  line-height: 1.65;
+  cursor: auto;
+}
+a { text-decoration:none; color:inherit }
+button { cursor:pointer; font-family:var(--ff); border:none; outline:none }
+img { display:block; max-width:100% }
+::selection { background:#4F46E5; color:#fff }
+
+/* cursor: browser default */
+
+/* ════════════════════════════════════════════
+   UTILS
+════════════════════════════════════════════ */
+.container { max-width: 1160px; margin: 0 auto; padding: 0 28px }
+.tag {
+  font-family: var(--mono);
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #A5B4FC; opacity: 1;
+}
+.lime { color: var(--lime) }
+.muted { color: var(--gray) }
+
+/* Scroll reveal */
+.sr { opacity:0; transform:translateY(24px); transition: opacity .6s var(--ease), transform .6s var(--ease) }
+.sr.in { opacity:1; transform:none }
+.sr-d1 { transition-delay:.08s } .sr-d2 { transition-delay:.16s }
+.sr-d3 { transition-delay:.24s } .sr-d4 { transition-delay:.32s }
+
+/* ════════════════════════════════════════════
+   BUTTONS
+════════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 6px;
+  font-family: var(--ff); font-size: 13.5px; font-weight: 600;
+  border: none; transition: var(--t); white-space: nowrap;
+  cursor: pointer; letter-spacing: .2px;
+}
+.btn-lime { background: linear-gradient(90deg, #4F46E5, #3B82F6); color: #FFFFFF; }
+.btn-lime:hover { background: linear-gradient(90deg, #4338CA, #2563EB); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(79,70,229,.35); }
+.btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.85) }
+.btn-ghost:hover { border-color: rgba(165,180,252,.5); color: #A5B4FC; }
+.btn-dark { background: var(--black3); border: 1px solid var(--border2); color: var(--white) }
+.btn-dark:hover { border-color: rgba(13,13,13,.06); color: var(--lime) }
+.btn-lg { padding: 16px 34px; font-size: 15px }
+
+/* ════════════════════════════════════════════
+   NAVBAR
+════════════════════════════════════════════ */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  padding: 0 28px;
+  transition: var(--t);
+}
+#nav.scrolled {
+  background: rgba(248,250,255,.97);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border2);
+}
+.nav-inner {
+  max-width: 1160px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--ffd); font-size: 20px; font-weight: 800;
+  letter-spacing: -.5px; color: #FFFFFF;
+  transition: var(--t);
+}
+#nav.scrolled .nav-logo { color: var(--ink); }
+#nav.scrolled .nav-logo-dot { background: var(--indigo); }
+.nav-logo-dot {
+  width: 8px; height: 8px;
+  background: var(--lime); border-radius: 50%;
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { opacity:1; transform:scale(1) }
+  50% { opacity:.4; transform:scale(.7) }
+}
+.nav-links { display:flex; align-items:center; gap:32px; list-style:none }
+.nav-link {
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,.75);
+  transition: var(--t); position: relative; padding: 4px 0;
+}
+.nav-link:hover { color: #FFFFFF; }
+#nav.scrolled .nav-link { color: var(--gray); }
+#nav.scrolled .nav-link:hover { color: var(--ink); }
+.nav-link::after {
+  content:''; position:absolute; bottom:0; left:0; right:0;
+  height: 1px; background: linear-gradient(90deg,#4F46E5,#3B82F6);
+  transform: scaleX(0); transition: var(--t);
+}
+.nav-link:hover { color: var(--white) }
+.nav-link:hover::after { transform: scaleX(1) }
+.nav-cta { display:flex; align-items:center; gap:10px }
+.ham {
+  display: none; flex-direction: column; gap: 5px;
+  padding: 8px; cursor: pointer;
+}
+.ham span { width:22px; height:1.5px; background:var(--white); border-radius:2px; transition:var(--t) }
+
+/* ════ HERO DECO ILLUSTRATIONS ════ */
+.hero-deco {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  animation: decoFadeIn .8s ease forwards;
+}
+@keyframes decoFadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+
+/* Monitor con código — arriba derecha */
+.hero-deco-screen {
+  width: 380px;
+  top: 80px; right: -60px;
+  opacity: 0; animation-delay: .4s;
+  transform-origin: top right;
+}
+
+/* Gráfico crecimiento — abajo derecha */
+.hero-deco-chart {
+  width: 280px;
+  bottom: 80px; right: 20px;
+  opacity: 0; animation-delay: .6s;
+  animation: decoFadeIn .8s .6s ease forwards, float-deco 5s 1.5s ease-in-out infinite;
+}
+@keyframes float-deco {
+  0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)}
+}
+
+/* Chat bot — abajo izquierda */
+.hero-deco-bot {
+  width: 220px;
+  bottom: 60px; left: 20px;
+  opacity: 0; animation-delay: .8s;
+  animation: decoFadeIn .8s .8s ease forwards, float-deco 6s 2s ease-in-out infinite;
+}
+
+/* SEO métricas — arriba izquierda */
+.hero-deco-seo {
+  width: 240px;
+  top: 90px; left: 10px;
+  opacity: 0; animation-delay: .5s;
+  animation: decoFadeIn .8s .5s ease forwards, float-deco 7s 1s ease-in-out infinite;
+}
+
+/* Notificaciones — izquierda medio */
+.hero-deco-notif {
+  width: 190px;
+  top: 50%; left: 30px;
+  transform: translateY(-30%);
+  opacity: 0; animation-delay: .7s;
+  animation: decoFadeIn .8s .7s ease forwards, float-deco 5.5s 1.8s ease-in-out infinite;
+}
+
+/* Persona trabajando — centro derecha, muy sutil */
+.hero-deco-person {
+  width: 180px;
+  top: 50%; right: 220px;
+  transform: translateY(-50%);
+  opacity: 0; animation-delay: .5s;
+  animation: decoFadeIn .8s .5s ease forwards;
+}
+
+/* Ocultar en móvil para no tapar contenido */
+@media(max-width:1024px) {
+  .hero-deco-screen { width:280px; right:-40px; top:60px }
+  .hero-deco-chart { display:none }
+  .hero-deco-bot { display:none }
+  .hero-deco-person { display:none }
+  .hero-deco-seo { display:none }
+  .hero-deco-notif { display:none }
+}
+@media(max-width:768px) {
+  .hero-deco { display:none }
+}
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 110px 0 80px;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 40%, #312E81 70%, #1D4ED8 100%);
+  color: #F8FAFF;
+}
+/* Noise grain */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: .3;
+}
+/* Gradient glow */
+.hero-glow {
+  position: absolute; pointer-events: none; z-index: 0;
+  top: -20%; right: -10%; width: 680px; height: 680px;
+  background: radial-gradient(circle, rgba(99,102,241,.50) 0%, transparent 60%);
+  border-radius: 50%;
+  animation: glow-drift 8s ease-in-out infinite alternate;
+}
+@keyframes glow-drift { 0%{transform:translate(0,0)} 100%{transform:translate(-40px,30px)} }
+.hero-glow2 {
+  position: absolute; pointer-events: none; z-index: 0;
+  bottom: 10%; left: -5%; width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(59,130,246,.40) 0%, transparent 60%);
+  border-radius: 50%;
+}
+
+/* Grid lines: removed */
+.hero-grid { display: none; }
+
+.hero-inner { position: relative; z-index: 2 }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid rgba(165,180,252,.35);
+  background: rgba(99,102,241,.15);
+  padding: 6px 16px; border-radius: 4px;
+  margin-bottom: 32px;
+}
+.hero-eyebrow-dot { width:6px; height:6px; background:#A5B4FC; border-radius:50%; animation:pulse-dot 2s infinite }
+
+.hero h1 {
+  font-family: var(--ffd);
+  font-size: clamp(3.2rem, 7vw, 7rem);
+  font-weight: 800; line-height: .95;
+  letter-spacing: -3px;
+  color: #FFFFFF;
+  margin-bottom: 28px;
+  text-shadow: 0 2px 40px rgba(0,0,0,.2);
+}
+.hero h1 .accent { color: #FFFFFF; display: block; font-style: italic; opacity: .85; }
+.hero h1 .outline {
+  color: #FFFFFF;
+  -webkit-text-stroke: none;
+  opacity: .9;
+}
+
+.hero-sub {
+  font-size: 17px; color: rgba(255,255,255,.70); max-width: 520px;
+  line-height: 1.78; margin-bottom: 40px;
+}
+.hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-bottom: 64px }
+
+/* Stats strip */
+.hero-stats {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 0;
+  background: transparent;
+  border: none;
+  max-width: 640px;
+  border-left: 1px solid rgba(255,255,255,.12);
+}
+.hero-stat {
+  background: transparent;
+  padding: 20px 24px;
+  border-right: 1px solid rgba(255,255,255,.12);
+  transition: var(--t);
+}
+.hero-stat:hover { background: rgba(255,255,255,.04); }
+.hs-num {
+  font-family: var(--ffd); font-size: 2rem;
+  color: #FFFFFF; font-weight: 700; line-height: 1;
+  margin-bottom: 4px;
+}
+.hs-label { font-family:var(--mono); font-size:9px; color:rgba(255,255,255,.50); letter-spacing:1.5px; text-transform:uppercase }
+
+/* Floating badge */
+.hero-badge-float {
+  position: absolute; right: 0; top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--r2); padding: 28px;
+  max-width: 280px;
+  animation: float-badge 4s ease-in-out infinite;
+  z-index: 3;
+}
+@keyframes float-badge { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(calc(-50% - 12px)) } }
+.hbf-title { font-family:var(--ffd); font-size:1rem; color:#FFFFFF; margin-bottom:18px; font-weight:700 }
+.hbf-item {
+  display:flex; align-items:center; gap:10px;
+  font-size:12px; color:rgba(255,255,255,.65);
+  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.10);
+}
+.hbf-item:last-child { border:none }
+.hbf-dot { width:6px; height:6px; background:#A5B4FC; border-radius:50%; flex-shrink:0 }
+
+/* ════════════════════════════════════════════
+   MARQUEE
+════════════════════════════════════════════ */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--border2);
+  border-bottom: 1px solid var(--border2);
+  padding: 14px 0;
+  background: var(--black2);
+}
+.marquee-track {
+  display: flex; gap: 48px;
+  animation: marquee 22s linear infinite;
+  width: max-content;
+}
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.marquee-item {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  color: var(--gray2); letter-spacing: 1.5px; text-transform: uppercase;
+  white-space: nowrap;
+}
+.marquee-sep { width:4px; height:4px; background:#6366F1; border-radius:50%; opacity:.6 }
+
+/* ════════════════════════════════════════════
+   SECTIONS
+════════════════════════════════════════════ */
+.section { padding: 100px 0 }
+.section-alt { background: var(--black2) }
+.section { border-top: 1px solid var(--border2) }
+.section-header { margin-bottom: 60px }
+.section-header.center { text-align:center }
+.section-header.center .s-sub { margin: 0 auto }
+
+.section-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+.section-eyebrow::before { content:''; width:24px; height:1px; background:linear-gradient(90deg,#4F46E5,#3B82F6) }
+.s-title {
+  font-family: var(--ffd); font-size: clamp(2rem,3.5vw,3rem);
+  font-weight: 800; color: var(--white); line-height: 1.08;
+  letter-spacing: -1px; margin-bottom: 14px;
+}
+.s-sub { font-size:15px; color:var(--gray); max-width:540px; line-height:1.78 }
+
+/* ════════════════════════════════════════════
+   SERVICES
+════════════════════════════════════════════ */
+.services-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 32px;
+  background: transparent;
+}
+
+.svc {
+  background: var(--white-card, #ffffff);
+  padding: 36px 32px;
+  transition: var(--t);
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+}
+.svc::before {
+  content: '';
+  position: absolute; bottom:0; left:0; right:0;
+  height: 2px; background: linear-gradient(90deg,#4F46E5,#3B82F6);
+  transform: scaleX(0); transition: transform .3s var(--ease);
+}
+.svc:hover { background: var(--black2) }
+.svc:hover::before { transform: scaleX(1) }
+.svc-num {
+  font-family: var(--mono); font-size: 10px; color: var(--gray2);
+  letter-spacing: 2px; margin-bottom: 20px;
+}
+.svc-icon { font-size: 28px; margin-bottom: 16px }
+.svc-name {
+  font-family: var(--ffd); font-size: 1.2rem;
+  color: var(--white); font-weight: 700;
+  margin-bottom: 10px; letter-spacing: -.3px;
+}
+.svc-desc { font-size: 13px; color: var(--gray); line-height: 1.65 }
+.svc-arrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; color: var(--lime);
+  margin-top: 18px; opacity: 0; transform: translateX(-8px);
+  transition: var(--t);
+}
+.svc:hover .svc-arrow { opacity:1; transform:none }
+
+/* ════════════════════════════════════════════
+   HOW IT WORKS
+════════════════════════════════════════════ */
+.process-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  background: transparent;
+  margin-top: 52px;
+}
+.proc {
+  background: transparent;
+  padding: 40px 36px;
+  display: flex; gap: 24px;
+  transition: var(--t);
+  border: 1px solid var(--border2);
+  border-radius: var(--r);
+}
+.proc:hover { background: var(--black2) }
+.proc-num {
+  font-family: var(--ffd); font-size: 3rem;
+  color: rgba(79,70,229,.12); font-weight: 800;
+  line-height: 1; flex-shrink: 0; width: 52px;
+  transition: var(--t);
+}
+.proc:hover .proc-num { color: #4F46E5; }
+.proc-body h3 {
+  font-family: var(--ffd); font-size: 1.15rem;
+  color: var(--white); margin-bottom: 8px;
+  font-weight: 700; letter-spacing: -.3px;
+}
+.proc-body p { font-size: 13px; color: var(--gray); line-height: 1.65 }
+.proc-time {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); font-size: 10px; color: var(--white);
+  background: var(--black2); border: 1px solid var(--border2); padding: 3px 10px; border-radius: 4px;
+  margin-top: 10px; letter-spacing: 1px;
+}
+
+/* ════════════════════════════════════════════
+   PRICING
+════════════════════════════════════════════ */
+.pricing-header {
+  display: flex; justify-content: space-between;
+  align-items: flex-end; margin-bottom: 36px; flex-wrap: wrap; gap: 20px;
+}
+.pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px }
+.price-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border2);
+  border-radius: var(--r2); overflow: hidden;
+  transition: var(--t); display:flex; flex-direction:column;
+}
+.price-card:hover { transform:translateY(-4px); border-color: rgba(13,13,13,.06); box-shadow: var(--sh) }
+.price-card.hot { border-color: #4F46E5; background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%); }
+.price-card.hot .pc-name { color: #FFFFFF; font-weight:700; }
+.price-card.hot .pc-price { color: #FFFFFF; }
+.price-card.hot .pc-period { color: #999999; }
+.price-card.hot .pc-feat { color: rgba(255,255,255,.8); }
+.pc-top {
+  padding: 30px 28px 24px;
+  border-bottom: 1px solid var(--border2);
+}
+.price-card.hot .pc-top {
+  border-bottom-color: rgba(255,255,255,.08);
+}
+.pc-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(165,180,252,.25); color: #C7D2FE; border: 1px solid rgba(165,180,252,.3);
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 4px; margin-bottom: 16px;
+}
+.pc-name {
+  font-family: var(--ffd); font-size: 1.3rem;
+  color: var(--white); font-weight: 700;
+  margin-bottom: 6px; letter-spacing: -.3px;
+}
+.pc-price {
+  font-family: var(--ffd); font-size: 2.6rem;
+  color: var(--white); font-weight: 800; line-height: 1;
+  margin-bottom: 4px;
+}
+.pc-period { font-family:var(--mono); font-size:10px; color:var(--gray); letter-spacing:1px }
+.pc-body { padding: 24px 28px; flex:1; display:flex; flex-direction:column }
+.pc-feats { list-style:none; display:flex; flex-direction:column; gap:10px; flex:1; margin-bottom:24px }
+.pc-feat {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 13px; color: var(--white2); line-height: 1.5;
+}
+.pc-feat-check { color:#6366F1; font-weight:700; flex-shrink:0; margin-top:1px }
+.pc-cta {
+  width: 100%; padding: 13px; border-radius: 6px;
+  font-family: var(--ff); font-size: 13.5px; font-weight: 700;
+  cursor: pointer; transition: var(--t);
+  text-align: center; display: block;
+}
+.pc-cta.lime { background: linear-gradient(90deg,#6366F1,#3B82F6); color:#FFFFFF; }
+.pc-cta.lime:hover { background:var(--lime2) }
+.pc-cta.ghost { background:transparent; border:1px solid var(--border2); color:var(--white2) }
+.pc-cta.ghost:hover { border-color: rgba(13,13,13,.06); color: var(--lime) }
+
+/* ════════════════════════════════════════════
+   GUÍA DE INFRAESTRUCTURA (tab panel)
+════════════════════════════════════════════ */
+
+
+.tab-nav {
+  display: flex; gap: 2px;
+  background: var(--black2); border: 1px solid var(--border2);
+  border-radius: var(--r); padding: 4px;
+  margin-bottom: 36px; flex-wrap: wrap;
+}
+.tab-btn {
+  flex: 1; min-width: 120px;
+  padding: 10px 18px; border-radius: 8px;
+  font-family: var(--mono); font-size: 11px;
+  font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gray); background: none; border: none;
+  transition: var(--t); cursor: pointer; text-align: center;
+}
+.tab-btn.active { background: linear-gradient(90deg,#4F46E5,#3B82F6); color: #FFFFFF; }
+.tab-panel { display: none }
+.tab-panel.active { display: block }
+
+/* Step cards */
+.step-list { display: flex; flex-direction: column; gap: 16px }
+.step-card {
+  background: #FFFFFF; border: 1px solid var(--border2);
+  border-radius: var(--r2); overflow: hidden;
+  transition: var(--t);
+}
+.step-card:hover { border-color: rgba(13,13,13,.06) }
+.step-head {
+  padding: 22px 28px;
+  display: flex; align-items: center; gap: 18px;
+  cursor: pointer;
+}
+.step-n {
+  width: 40px; height: 40px; flex-shrink: 0;
+  background: linear-gradient(135deg,#4F46E5,#3B82F6); border: none;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ffd); font-size: 16px;
+  font-weight: 800; color: #FFFFFF;
+}
+.step-head-text h4 {
+  font-family: var(--ffd); font-size: 1.05rem;
+  color: var(--white); font-weight: 700; margin-bottom: 3px;
+}
+.step-head-text p { font-size: 12.5px; color: var(--gray) }
+.step-time {
+  margin-left: auto; font-family: var(--mono);
+  font-size: 10px; color: #4F46E5;
+  background: #EEF2FF; border: 1px solid rgba(79,70,229,.2); padding: 4px 12px;
+  border-radius: 4px; letter-spacing: 1px; flex-shrink: 0;
+}
+.step-body {
+  padding: 0 28px 24px;
+  border-top: 1px solid var(--border2);
+  display: none;
+}
+.step-card.open .step-body { display: block; padding-top: 20px }
+.step-card.open .step-head { background: rgba(13,13,13,.06) }
+
+.option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 }
+.option-card {
+  background: #FFFFFF; border: 1px solid var(--border2);
+  border-radius: var(--r); padding: 18px;
+  transition: var(--t);
+}
+.option-card:hover { border-color: rgba(13,13,13,.06) }
+.option-card.best { border-color: rgba(13,13,13,.06) }
+.opt-rec {
+  font-family: var(--mono); font-size: 9px;
+  background: var(--lime); color: var(--black);
+  padding: 2px 8px; border-radius: 3px;
+  letter-spacing: 1px; font-weight: 500;
+  display: inline-block; margin-bottom: 10px;
+}
+.option-card h4 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 5px }
+.option-card .price { font-family:var(--ffd); font-size:1.5rem; color:var(--lime); margin-bottom:6px }
+.option-card p { font-size: 12px; color: var(--gray); line-height: 1.55; margin-bottom: 10px }
+.opt-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 600; color: var(--lime);
+  padding: 6px 14px; border: 1px solid rgba(13,13,13,.06);
+  border-radius: 4px; transition: var(--t);
+}
+.opt-link:hover { background: var(--lime-dim) }
+
+.cmd-box {
+  background: #0F172A; border: 1px solid rgba(13,13,13,.06);
+  border-radius: var(--r); padding: 16px 20px;
+  font-family: var(--mono); font-size: 12.5px;
+  color: #FFAAAA; line-height: 1.7; margin: 12px 0;
+  overflow-x: auto;
+}
+.cmd-box .c { color: var(--gray) }
+.cmd-box .h { color: #79c0ff }
+.cmd-box .v { color: #ffa657 }
+
+.tip-box {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(13,13,13,.06); border: 1px solid rgba(13,13,13,.06);
+  border-radius: var(--r); padding: 14px 18px;
+  font-size: 13px; color: #333333; margin-top: 14px;
+  line-height: 1.6;
+}
+.warn-box {
+  display: flex; gap: 10px; align-items: flex-start;
+  background: rgba(251,191,36,.04); border: 1px solid rgba(251,191,36,.15);
+  border-radius: var(--r); padding: 14px 18px;
+  font-size: 13px; color: rgba(251,191,36,.8); margin-top: 14px;
+  line-height: 1.6;
+}
+
+/* Checklist */
+.checklist { display:flex; flex-direction:column; gap:8px; margin: 14px 0 }
+.cl-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; background: var(--black);
+  border: 1px solid var(--border2); border-radius: var(--r);
+  font-size: 13px; color: var(--white2); transition: var(--t);
+  cursor: pointer;
+}
+.cl-item:hover { border-color: rgba(13,13,13,.06) }
+.cl-check {
+  width: 20px; height: 20px; flex-shrink: 0;
+  border: 1.5px solid var(--gray2); border-radius: 5px;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--t); font-size: 11px;
+}
+.cl-item.checked .cl-check { background: var(--lime); border-color: var(--lime); color: var(--black) }
+.cl-item.checked { color: var(--gray); text-decoration: line-through; text-decoration-color: var(--gray2) }
+.cl-progress {
+  height: 4px; background: var(--black2);
+  border-radius: 4px; margin-bottom: 16px; overflow: hidden;
+}
+.cl-progress-bar { height: 100%; background: var(--lime); border-radius: 4px; transition: width .4s var(--ease); width: 0% }
+
+/* ════════════════════════════════════════════
+   TESTIMONIOS
+════════════════════════════════════════════ */
+.test-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 52px }
+.test-card {
+  background: #FFFFFF; border: 1px solid var(--border2);
+  border-radius: var(--r2); padding: 28px;
+  transition: var(--t);
+}
+.test-card:hover { border-color: rgba(13,13,13,.06); transform: translateY(-3px) }
+.test-stars { font-size: 12px; letter-spacing: 2px; color: #6366F1; margin-bottom: 14px }
+.test-text { font-size: 13.5px; color: var(--white2); line-height: 1.75; margin-bottom: 22px; font-style: italic }
+.test-author { display:flex; align-items:center; gap:12px; padding-top:16px; border-top:1px solid var(--border2) }
+.test-av {
+  width: 38px; height: 38px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ffd); font-size: 14px; font-weight: 800;
+  color: #FFFFFF; background: linear-gradient(135deg,#4F46E5,#3B82F6); flex-shrink: 0;
+}
+.test-name { font-size: 13px; font-weight: 700; color: var(--white) }
+.test-role { font-family: var(--mono); font-size: 10px; color: var(--gray); letter-spacing: 1px; margin-top: 2px }
+
+/* ════════════════════════════════════════════
+   CTA FINAL
+════════════════════════════════════════════ */
+.cta-final {
+  padding: 120px 0;
+  text-align: center;
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg,#0F172A,#1E1B4B);
+  color: #F0EEE9;
+}
+.cta-final::before {
+  content: '';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(255,255,255,.05) 0%, transparent 65%);
+  border-radius: 50%; pointer-events: none;
+}
+.cta-final h2 {
+  font-family: var(--ffd); font-size: clamp(2.4rem,5vw,5rem);
+  font-weight: 800; color: #FFFFFF;
+  letter-spacing: -2px; line-height: 1; margin-bottom: 20px;
+}
+.cta-final h2 em { color: #FFFFFF; font-style: italic; opacity: .85; }
+.cta-final p { font-size: 16px; color: rgba(240,238,233,.55); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto }
+.cta-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom: 32px }
+.cta-trust { display:flex; gap:24px; justify-content:center; flex-wrap:wrap }
+.ct { display:flex; align-items:center; gap:7px; font-family:var(--mono); font-size:10px; color:rgba(240,238,233,.4); letter-spacing:1px }
+.ct::before { content:''; width:5px; height:5px; background:var(--lime); border-radius:50% }
+
+/* ════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════ */
+footer {
+  background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%);
+  border-top: none;
+  padding: 40px 0;
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { font-family:var(--ffd); font-size:18px; font-weight:800; color:#FFFFFF; }
+.footer-links { display:flex; gap:24px }
+.footer-links a { font-size:12.5px; color:#888888; transition:var(--t) }
+.footer-links a:hover { color:var(--lime) }
+.footer-copy { font-family:var(--mono); font-size:10px; color:#555555; letter-spacing:1px }
+
+/* WA Float */
+.wa-float {
+  position: fixed; bottom: 28px; right: 28px; z-index: 400;
+}
+.wa-tooltip {
+  position: absolute; bottom: 70px; right: 0;
+  background: #1E1B4B; border: 1px solid rgba(99,102,241,.25);
+  border-radius: 10px; padding: 10px 16px;
+  font-size: 12px; font-weight: 600; color: #FFFFFF;
+  white-space: nowrap;
+  opacity: 0; transform: translateY(6px);
+  transition: var(--t); pointer-events: none;
+}
+.wa-float:hover .wa-tooltip { opacity:1; transform:none }
+.wa-btn {
+  width: 54px; height: 54px;
+  background: #25D366; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 25px; transition: var(--t);
+  box-shadow: 0 4px 24px rgba(37,211,102,.45);
+}
+.wa-btn:hover { transform: scale(1.1) }
+.wa-ring {
+  position: absolute; inset: -6px; border-radius: 50%;
+  border: 2px solid rgba(37,211,102,.35);
+  animation: wa-pulse 2.5s ease-out infinite;
+}
+@keyframes wa-pulse { 0%{transform:scale(1);opacity:.8} 100%{transform:scale(1.6);opacity:0} }
+
+/* Mobile menu */
+.mob-menu {
+  display: none; position: fixed; inset: 0;
+  background: linear-gradient(135deg, #0F172A, #1E1B4B); z-index: 450;
+  flex-direction: column; justify-content: center;
+  align-items: center; gap: 28px;
+  opacity: 0; transition: opacity .3s;
+}
+.mob-menu.open { display:flex; opacity:1 }
+.mob-link { font-family:var(--ffd); font-size:2.2rem; font-weight:800; color:rgba(255,255,255,.7); transition:var(--t) }
+.mob-link:hover { color:var(--lime) }
+.mob-close { position:absolute; top:24px; right:28px; font-size:28px; color:var(--white); opacity:.5; cursor:pointer; transition:var(--t) }
+.mob-close:hover { opacity:1; transform:rotate(90deg) }
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media(max-width:1024px) {
+  .hero-badge-float { display:none }
+  .services-grid { grid-template-columns: 1fr 1fr }
+  .pricing-grid { grid-template-columns: 1fr }
+  .test-grid { grid-template-columns: 1fr 1fr }
+  .hero-stats { grid-template-columns: 1fr 1fr }
+  .process-grid { grid-template-columns: 1fr }
+  .option-grid { grid-template-columns: 1fr }
+}
+@media(max-width:768px) {
+  body { cursor: auto }
+  #cursor { display: none }
+  .nav-links,.nav-cta { display:none }
+  .ham { display:flex }
+  .section { padding: 64px 0 }
+  .services-grid { grid-template-columns: 1fr }
+  .hero h1 { letter-spacing: -1.5px }
+  .hero-badge-float { display:none }
+  .test-grid { grid-template-columns: 1fr }
+  .pricing-grid { grid-template-columns: 1fr }
+  .footer-inner { flex-direction:column; text-align:center }
+  .footer-links { justify-content:center }
+  .wa-float { bottom:18px; right:18px }
+}
+@media(max-width:480px) {
+  .container { padding: 0 18px }
+  .hero h1 { font-size: 2.8rem; letter-spacing:-1px }
+  .hero-stats { grid-template-columns: 1fr 1fr }
+  .cta-btns { flex-direction: column; align-items:center }
+  .tab-btn { font-size: 10px; padding: 9px 12px }
+</style>
+</head>
+<body>
+
+<!-- cursor removed -->
+
+<!-- ════ NAV ════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo">
+      <div class="nav-logo-dot"></div>
+      InnovaStudio
+    </a>
+    <ul class="nav-links">
+      <li><a href="#servicios" class="nav-link" id="nav-link-services">Servicios</a></li>
+      <li><a href="#proceso" class="nav-link" id="nav-link-process">Cómo funciona</a></li>
+      <li><a href="#precios" class="nav-link">Precios</a></li>
+      <li><a href="#contacto" class="nav-link" id="nav-link-contact">Contacto</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#precios" class="btn btn-ghost" style="font-size:13px;padding:10px 20px">Ver Precios</a>
+      <a href="https://wa.me/56990819450?text=Hola%2C%20vi%20InnovaStudio%20y%20quiero%20una%20cotización." target="_blank" class="btn btn-lime" style="font-size:13px;padding:10px 20px">Cotizar ahora →</a>
+    </div>
+    <div class="ham" id="ham" onclick="openMob()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob-menu" id="mobMenu">
+  <span class="mob-close" onclick="closeMob()">✕</span>
+  <a href="#servicios" class="mob-link" id="mob-link-services" onclick="closeMob()">Servicios</a>
+  <a href="#proceso" class="mob-link" id="mob-link-process" onclick="closeMob()">Proceso</a>
+  <a href="#precios" class="mob-link" id="mob-link-prices" onclick="closeMob()">Precios</a>
+  <a href="#contacto" class="mob-link" id="mob-link-contact" onclick="closeMob()">Contacto</a>
+  <a href="https://wa.me/56990819450?text=Hola%2C%20quiero%20una%20cotización." target="_blank" class="btn btn-lime btn-lg" style="margin-top:16px">WhatsApp →</a>
+</div>
+
+<!-- ════ HERO ════ -->
+<section id="inicio" class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-grid"></div>
+
+  <!-- ── ILUSTRACIONES DECORATIVAS DE FONDO ── -->
+
+  <!-- Pantalla / monitor con código (esquina superior derecha) -->
+  <svg class="hero-deco hero-deco-screen" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg">
+    <!-- Monitor -->
+    <rect x="10" y="10" width="400" height="240" rx="16" ry="16" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+    <rect x="10" y="10" width="400" height="36" rx="16" ry="16" fill="rgba(255,255,255,.06)"/>
+    <!-- Botones barra superior -->
+    <circle cx="34" cy="28" r="5" fill="rgba(255,100,100,.35)"/>
+    <circle cx="52" cy="28" r="5" fill="rgba(255,200,50,.3)"/>
+    <circle cx="70" cy="28" r="5" fill="rgba(50,220,100,.3)"/>
+    <!-- Líneas de código -->
+    <rect x="30" y="64" width="80" height="6" rx="3" fill="rgba(165,180,252,.35)"/>
+    <rect x="120" y="64" width="140" height="6" rx="3" fill="rgba(134,239,172,.25)"/>
+    <rect x="30" y="82" width="50" height="6" rx="3" fill="rgba(253,186,116,.3)"/>
+    <rect x="90" y="82" width="110" height="6" rx="3" fill="rgba(255,255,255,.18)"/>
+    <rect x="210" y="82" width="60" height="6" rx="3" fill="rgba(165,180,252,.3)"/>
+    <rect x="50" y="100" width="130" height="6" rx="3" fill="rgba(134,239,172,.2)"/>
+    <rect x="190" y="100" width="80" height="6" rx="3" fill="rgba(255,255,255,.15)"/>
+    <rect x="30" y="118" width="90" height="6" rx="3" fill="rgba(253,186,116,.25)"/>
+    <rect x="130" y="118" width="160" height="6" rx="3" fill="rgba(165,180,252,.2)"/>
+    <rect x="50" y="136" width="70" height="6" rx="3" fill="rgba(255,255,255,.12)"/>
+    <rect x="130" y="136" width="120" height="6" rx="3" fill="rgba(134,239,172,.18)"/>
+    <rect x="30" y="154" width="200" height="6" rx="3" fill="rgba(165,180,252,.15)"/>
+    <rect x="30" y="172" width="60" height="6" rx="3" fill="rgba(253,186,116,.2)"/>
+    <rect x="100" y="172" width="100" height="6" rx="3" fill="rgba(255,255,255,.12)"/>
+    <!-- Cursor parpadeante -->
+    <rect x="210" y="172" width="3" height="14" rx="1" fill="rgba(165,180,252,.7)">
+      <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+    </rect>
+    <!-- Base monitor -->
+    <rect x="185" y="252" width="50" height="8" rx="4" fill="rgba(255,255,255,.08)"/>
+    <rect x="175" y="260" width="70" height="6" rx="3" fill="rgba(255,255,255,.06)"/>
+  </svg>
+
+  <!-- Gráfico de crecimiento (esquina inferior derecha) -->
+  <svg class="hero-deco hero-deco-chart" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Fondo tarjeta -->
+    <rect x="0" y="0" width="320" height="200" rx="16" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+    <!-- Título -->
+    <rect x="16" y="16" width="90" height="8" rx="4" fill="rgba(255,255,255,.25)"/>
+    <rect x="16" y="30" width="60" height="6" rx="3" fill="rgba(165,180,252,.3)"/>
+    <!-- Métrica grande -->
+    <text x="16" y="72" font-family="Georgia,serif" font-size="32" font-weight="700" fill="rgba(255,255,255,.9)">+287%</text>
+    <rect x="16" y="80" width="70" height="5" rx="2.5" fill="rgba(134,239,172,.35)"/>
+    <!-- Línea del gráfico -->
+    <polyline points="16,160 60,148 100,135 140,118 180,100 220,78 260,55 300,32"
+      fill="none" stroke="rgba(99,102,241,.7)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Área bajo la línea -->
+    <polygon points="16,160 60,148 100,135 140,118 180,100 220,78 260,55 300,32 300,175 16,175"
+      fill="url(#chartGrad)" opacity=".4"/>
+    <defs>
+      <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#6366F1" stop-opacity=".5"/>
+        <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- Puntos en la línea -->
+    <circle cx="300" cy="32" r="5" fill="#6366F1" stroke="white" stroke-width="2"/>
+    <circle cx="220" cy="78" r="4" fill="rgba(99,102,241,.8)" stroke="rgba(255,255,255,.4)" stroke-width="1.5"/>
+    <!-- Líneas de referencia -->
+    <line x1="16" y1="120" x2="304" y2="120" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+    <line x1="16" y1="155" x2="304" y2="155" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="4,4"/>
+  </svg>
+
+  <!-- Chat bot (izquierda abajo) -->
+  <svg class="hero-deco hero-deco-bot" viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg">
+    <!-- Fondo tarjeta -->
+    <rect x="0" y="0" width="260" height="220" rx="16" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+    <!-- Header bot -->
+    <rect x="0" y="0" width="260" height="44" rx="16" fill="rgba(99,102,241,.2)"/>
+    <rect x="0" y="28" width="260" height="16" fill="rgba(99,102,241,.2)"/>
+    <circle cx="22" cy="22" r="10" fill="rgba(99,102,241,.5)"/>
+    <!-- Ícono robot -->
+    <text x="16" y="28" font-size="14">🤖</text>
+    <rect x="40" y="14" width="70" height="7" rx="3.5" fill="rgba(255,255,255,.5)"/>
+    <rect x="40" y="25" width="45" height="5" rx="2.5" fill="rgba(255,255,255,.25)"/>
+    <!-- Burbuja bot -->
+    <rect x="12" y="56" width="160" height="36" rx="10" fill="rgba(99,102,241,.25)" stroke="rgba(99,102,241,.3)" stroke-width="1"/>
+    <rect x="20" y="66" width="100" height="6" rx="3" fill="rgba(255,255,255,.45)"/>
+    <rect x="20" y="78" width="70" height="6" rx="3" fill="rgba(255,255,255,.3)"/>
+    <!-- Burbuja usuario -->
+    <rect x="70" y="104" width="178" height="36" rx="10" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+    <rect x="80" y="114" width="90" height="6" rx="3" fill="rgba(255,255,255,.35)"/>
+    <rect x="80" y="126" width="120" height="6" rx="3" fill="rgba(255,255,255,.2)"/>
+    <!-- Burbuja bot respuesta -->
+    <rect x="12" y="152" width="190" height="48" rx="10" fill="rgba(99,102,241,.2)" stroke="rgba(99,102,241,.25)" stroke-width="1"/>
+    <rect x="20" y="162" width="120" height="6" rx="3" fill="rgba(255,255,255,.4)"/>
+    <rect x="20" y="174" width="80" height="6" rx="3" fill="rgba(255,255,255,.25)"/>
+    <rect x="20" y="186" width="100" height="6" rx="3" fill="rgba(255,255,255,.2)"/>
+    <!-- Punto "escribiendo" -->
+    <circle cx="220" cy="200" r="3" fill="rgba(165,180,252,.6)">
+      <animate attributeName="opacity" values="1;0.2;1" dur="1s" begin="0s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="232" cy="200" r="3" fill="rgba(165,180,252,.6)">
+      <animate attributeName="opacity" values="1;0.2;1" dur="1s" begin="0.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="244" cy="200" r="3" fill="rgba(165,180,252,.6)">
+      <animate attributeName="opacity" values="1;0.2;1" dur="1s" begin="0.6s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <!-- Ícono persona trabajando (centro-derecha, muy sutil) -->
+  <svg class="hero-deco hero-deco-person" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Escritorio -->
+    <rect x="20" y="130" width="160" height="8" rx="4" fill="rgba(255,255,255,.10)"/>
+    <!-- Laptop -->
+    <rect x="40" y="80" width="120" height="52" rx="8" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+    <rect x="48" y="88" width="104" height="36" rx="4" fill="rgba(99,102,241,.15)"/>
+    <!-- Pantalla laptop contenido -->
+    <rect x="54" y="94" width="50" height="5" rx="2.5" fill="rgba(165,180,252,.4)"/>
+    <rect x="54" y="103" width="35" height="4" rx="2" fill="rgba(255,255,255,.2)"/>
+    <rect x="54" y="111" width="45" height="4" rx="2" fill="rgba(134,239,172,.25)"/>
+    <!-- Gráfico en pantalla laptop -->
+    <polyline points="110,118 120,110 130,106 140,98 148,92"
+      fill="none" stroke="rgba(99,102,241,.7)" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="148" cy="92" r="2.5" fill="rgba(165,180,252,.9)"/>
+    <!-- Base laptop -->
+    <rect x="30" y="132" width="140" height="6" rx="3" fill="rgba(255,255,255,.08)"/>
+    <!-- Persona (silueta abstracta) -->
+    <circle cx="100" cy="44" r="20" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+    <!-- Cara simplificada -->
+    <circle cx="93" cy="41" r="2.5" fill="rgba(255,255,255,.25)"/>
+    <circle cx="107" cy="41" r="2.5" fill="rgba(255,255,255,.25)"/>
+    <path d="M 93 50 Q 100 56 107 50" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Cuerpo -->
+    <path d="M 78 76 Q 100 64 122 76" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.10)" stroke-width="1"/>
+    <!-- Brazos sobre laptop -->
+    <path d="M 78 120 Q 85 100 90 96" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 122 120 Q 115 100 110 96" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="5" stroke-linecap="round"/>
+  </svg>
+
+  <!-- ── ILUSTRACIONES LADO IZQUIERDO ── -->
+
+  <!-- Métricas SEO / Analytics (izquierda arriba) -->
+  <svg class="hero-deco hero-deco-seo" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="280" height="200" rx="16" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.09)" stroke-width="1"/>
+    <rect x="0" y="0" width="280" height="42" rx="16" fill="rgba(99,102,241,.15)"/>
+    <rect x="0" y="26" width="280" height="16" fill="rgba(99,102,241,.15)"/>
+    <rect x="14" y="14" width="80" height="7" rx="3.5" fill="rgba(255,255,255,.45)"/>
+    <rect x="14" y="26" width="50" height="5" rx="2.5" fill="rgba(165,180,252,.35)"/>
+    <!-- Barras métricas -->
+    <rect x="14" y="60" width="35" height="7" rx="3.5" fill="rgba(255,255,255,.15)"/>
+    <rect x="14" y="78" width="240" height="6" rx="3" fill="rgba(255,255,255,.06)"/>
+    <rect x="14" y="78" width="196" height="6" rx="3" fill="rgba(134,239,172,.4)"/>
+    <rect x="14" y="96" width="240" height="6" rx="3" fill="rgba(255,255,255,.06)"/>
+    <rect x="14" y="96" width="158" height="6" rx="3" fill="rgba(165,180,252,.45)"/>
+    <rect x="14" y="114" width="240" height="6" rx="3" fill="rgba(255,255,255,.06)"/>
+    <rect x="14" y="114" width="220" height="6" rx="3" fill="rgba(253,186,116,.4)"/>
+    <rect x="14" y="72" width="30" height="5" rx="2.5" fill="rgba(255,255,255,.2)"/>
+    <rect x="14" y="90" width="38" height="5" rx="2.5" fill="rgba(255,255,255,.2)"/>
+    <rect x="14" y="108" width="34" height="5" rx="2.5" fill="rgba(255,255,255,.2)"/>
+    <!-- Mini tarjetas -->
+    <rect x="14" y="138" width="74" height="48" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+    <rect x="98" y="138" width="74" height="48" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+    <rect x="182" y="138" width="74" height="48" rx="8" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+    <rect x="22" y="148" width="30" height="10" rx="5" fill="rgba(134,239,172,.4)"/>
+    <rect x="22" y="163" width="50" height="5" rx="2.5" fill="rgba(255,255,255,.18)"/>
+    <rect x="106" y="148" width="30" height="10" rx="5" fill="rgba(165,180,252,.4)"/>
+    <rect x="106" y="163" width="50" height="5" rx="2.5" fill="rgba(255,255,255,.18)"/>
+    <rect x="190" y="148" width="30" height="10" rx="5" fill="rgba(253,186,116,.4)"/>
+    <rect x="190" y="163" width="50" height="5" rx="2.5" fill="rgba(255,255,255,.18)"/>
+  </svg>
+
+  <!-- Notificaciones digitales (izquierda medio-bajo) -->
+  <svg class="hero-deco hero-deco-notif" viewBox="0 0 200 230" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="200" height="230" rx="16" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+    <rect x="14" y="16" width="90" height="7" rx="3.5" fill="rgba(255,255,255,.3)"/>
+    <rect x="14" y="28" width="60" height="5" rx="2.5" fill="rgba(165,180,252,.25)"/>
+    <!-- Notif 1 -->
+    <rect x="10" y="48" width="180" height="44" rx="10" fill="rgba(99,102,241,.15)" stroke="rgba(99,102,241,.2)" stroke-width="1"/>
+    <text x="18" y="74" font-size="16">💬</text>
+    <rect x="44" y="57" width="80" height="6" rx="3" fill="rgba(255,255,255,.4)"/>
+    <rect x="44" y="68" width="110" height="5" rx="2.5" fill="rgba(255,255,255,.2)"/>
+    <rect x="44" y="78" width="70" height="5" rx="2.5" fill="rgba(255,255,255,.15)"/>
+    <rect x="158" y="55" width="24" height="10" rx="5" fill="rgba(134,239,172,.5)"/>
+    <!-- Notif 2 -->
+    <rect x="10" y="102" width="180" height="44" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+    <text x="18" y="128" font-size="16">📊</text>
+    <rect x="44" y="111" width="70" height="6" rx="3" fill="rgba(255,255,255,.3)"/>
+    <rect x="44" y="122" width="100" height="5" rx="2.5" fill="rgba(255,255,255,.15)"/>
+    <rect x="44" y="132" width="60" height="5" rx="2.5" fill="rgba(255,255,255,.1)"/>
+    <!-- Notif 3 -->
+    <rect x="10" y="156" width="180" height="44" rx="10" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+    <text x="18" y="182" font-size="16">🚀</text>
+    <rect x="44" y="165" width="90" height="6" rx="3" fill="rgba(255,255,255,.3)"/>
+    <rect x="44" y="176" width="75" height="5" rx="2.5" fill="rgba(255,255,255,.15)"/>
+    <rect x="44" y="186" width="110" height="5" rx="2.5" fill="rgba(255,255,255,.1)"/>
+    <circle cx="174" cy="108" r="7" fill="rgba(239,68,68,.55)"/>
+    <!-- Puntos pulsantes -->
+    <circle cx="20" cy="215" r="4" fill="rgba(165,180,252,.5)">
+      <animate attributeName="opacity" values="0.5;0.15;0.5" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="34" cy="215" r="4" fill="rgba(165,180,252,.4)">
+      <animate attributeName="opacity" values="0.4;0.1;0.4" dur="1.8s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="48" cy="215" r="4" fill="rgba(165,180,252,.3)">
+      <animate attributeName="opacity" values="0.3;0.05;0.3" dur="1.8s" begin="0.8s" repeatCount="indefinite"/>
+    </circle>
+  </svg>
+
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-eyebrow sr">
+        <div class="hero-eyebrow-dot"></div>
+        <span class="tag" id="hero-tag">Agencia Digital — Castro, Chiloé</span>
+      </div>
+
+      <h1 class="sr sr-d1">
+        <span id="hero-line1">Sitios web</span><br>
+        <span class="accent" id="hero-accent">que venden</span>
+        <span class="outline" id="hero-outline">de verdad.</span>
+      </h1>
+
+      <p class="hero-sub sr sr-d2" id="hero-sub">
+        Diseñamos y desarrollamos sitios web profesionales para clínicas, negocios y emprendimientos en Chile. Más pacientes, más reservas, más ventas. Entrega en 15 días.
+      </p>
+
+      <div class="hero-actions sr sr-d3">
+        <a href="https://wa.me/56990819450?text=Hola%2C%20quiero%20cotizar%20un%20sitio%20web%20con%20InnovaStudio." target="_blank" class="btn btn-lime btn-lg" id="hero-btn1">Quiero mi sitio web →</a>
+        <a href="#precios" class="btn btn-ghost btn-lg" id="hero-btn2">Ver precios</a>
+      </div>
+
+      <div class="hero-stats sr sr-d4">
+        <div class="hero-stat">
+          <div class="hs-num" id="hero-stat1-num">+120</div>
+          <div class="hs-label" id="hero-stat1-lbl">Proyectos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num" id="hero-stat2-num">15</div>
+          <div class="hs-label" id="hero-stat2-lbl">Días de entrega</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num" id="hero-stat3-num">4.9★</div>
+          <div class="hs-label" id="hero-stat3-lbl">Satisfacción</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num" id="hero-stat4-num">0</div>
+          <div class="hs-label" id="hero-stat4-lbl">Mensualidad forzada</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating badge -->
+    <div class="hero-badge-float">
+      <div class="hbf-title" id="hero-badge-title">¿Qué incluye tu sitio?</div>
+      <div class="hbf-item"><div class="hbf-dot"></div><span id="hero-badge-i1">Diseño premium exclusivo</span></div>
+      <div class="hbf-item"><div class="hbf-dot"></div><span id="hero-badge-i2">Dominio + hosting gratis 1 año</span></div>
+      <div class="hbf-item"><div class="hbf-dot"></div><span id="hero-badge-i3">SSL certificado</span></div>
+      <div class="hbf-item"><div class="hbf-dot"></div><span id="hero-badge-i4">Webpay / Flow integrado</span></div>
+      <div class="hbf-item"><div class="hbf-dot"></div><span id="hero-badge-i5">WhatsApp + 6 correos</span></div>
+      <div class="hbf-item"><div class="hbf-dot"></div><span id="hero-badge-i6">SEO local optimizado</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ MARQUEE ════ -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-sep"></span>Diseño Web</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Webpay</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Agenda Online</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>SEO Local</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Bot WhatsApp</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Flow</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>SSL Certificado</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Google Analytics</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Meta Ads</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Google Ads</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Automatización</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Diseño Web</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Webpay</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Agenda Online</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>SEO Local</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Bot WhatsApp</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Flow</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>SSL Certificado</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Google Analytics</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Meta Ads</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Google Ads</div>
+    <div class="marquee-item"><span class="marquee-sep"></span>Automatización</div>
+  </div>
+</div>
+
+<!-- ════ SERVICIOS ════ -->
+<section id="servicios" class="section section-alt">
+  <div class="container">
+    <div class="section-header sr">
+      <div class="section-eyebrow"><span class="tag" id="svc-tag">Servicios</span></div>
+      <h2 class="s-title" id="svc-title">Todo lo que necesitas<br>para crecer online</h2>
+      <p class="s-sub" id="svc-sub">Desde el diseño hasta la automatización. Nos encargamos de todo para que tú te enfoques en tu negocio.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="svc sr">
+        <div class="svc-num">01</div>
+        <div class="svc-icon">🎨</div>
+        <div class="svc-name" id="svc-1-name">Diseño Web Premium</div>
+        <p class="svc-desc" id="svc-1-desc">Sitios modernos, rápidos y responsive. Diseño exclusivo adaptado a tu marca. Ningún cliente tendrá el mismo sitio.</p>
+        <div class="svc-arrow">Ver más →</div>
+      </div>
+      <div class="svc sr sr-d1">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">💳</div>
+        <div class="svc-name" id="svc-2-name">Pagos Online</div>
+        <p class="svc-desc" id="svc-2-desc">Integramos Webpay, Flow y transferencia bancaria. Carro de compra, pago de adelanto y confirmación automática.</p>
+        <div class="svc-arrow">Ver más →</div>
+      </div>
+      <div class="svc sr sr-d2">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">🔍</div>
+        <div class="svc-name" id="svc-3-name">SEO Local</div>
+        <p class="svc-desc" id="svc-3-desc">Aparecer en Google cuando te buscan en tu ciudad. Optimización técnica y de contenido para posicionamiento real.</p>
+        <div class="svc-arrow">Ver más →</div>
+      </div>
+      <div class="svc sr">
+        <div class="svc-num">04</div>
+        <div class="svc-icon">🤖</div>
+        <div class="svc-name" id="svc-4-name">Bot de WhatsApp</div>
+        <p class="svc-desc" id="svc-4-desc">Atención automática 24/7. El bot responde consultas, agenda horas y deriva a un agente humano cuando se necesita.</p>
+        <div class="svc-arrow">Ver más →</div>
+      </div>
+      <div class="svc sr sr-d1">
+        <div class="svc-num">05</div>
+        <div class="svc-icon">📅</div>
+        <div class="svc-name" id="svc-5-name">Agenda Online</div>
+        <p class="svc-desc" id="svc-5-desc">Sistema de reservas online con notificaciones automáticas, confirmación de hora y reducción de inasistencias.</p>
+        <div class="svc-arrow">Ver más →</div>
+      </div>
+      <div class="svc sr sr-d2">
+        <div class="svc-num">06</div>
+        <div class="svc-icon">📈</div>
+        <div class="svc-name" id="svc-6-name">Marketing Digital</div>
+        <p class="svc-desc" id="svc-6-desc">Campañas en Meta Ads y Google Ads. Configuración de Analytics, Píxel de Meta y reportes mensuales de resultados.</p>
+        <div class="svc-arrow">Ver más →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PROCESO ════ -->
+<section id="proceso" class="section">
+  <div class="container">
+    <div class="section-header sr">
+      <div class="section-eyebrow"><span class="tag" id="proc-tag">Cómo Funciona</span></div>
+      <h2 class="s-title" id="proc-title">De cero a online<br>en 15 días hábiles</h2>
+      <p class="s-sub" id="proc-sub">Un proceso ordenado, comunicado y sin sorpresas. Sabes exactamente qué pasa en cada etapa.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="proc sr">
+        <div class="proc-num">01</div>
+        <div class="proc-body">
+          <h3 id="proc-1-title">Reunión de inicio</h3>
+          <p id="proc-1-desc">Conocemos tu negocio, tus objetivos y tu identidad de marca. Definimos la estructura, los textos base y el diseño. Nada de formularios eternos.</p>
+          <span class="proc-time" id="proc-1-time">⏱ Día 1–2</span>
+        </div>
+      </div>
+      <div class="proc sr sr-d1">
+        <div class="proc-num">02</div>
+        <div class="proc-body">
+          <h3 id="proc-2-title">Diseño y desarrollo</h3>
+          <p id="proc-2-desc">Construimos tu sitio completo con todas las secciones, funcionalidades y contenidos. Recibes un preview para revisión antes de publicar.</p>
+          <span class="proc-time" id="proc-2-time">⏱ Día 3–9</span>
+        </div>
+      </div>
+      <div class="proc sr">
+        <div class="proc-num">03</div>
+        <div class="proc-body">
+          <h3 id="proc-3-title">Revisión y ajustes</h3>
+          <p id="proc-3-desc">Hasta 2 rondas de ajustes incluidas. Textos, colores, secciones: lo que sea hasta que quedes 100% conforme. Tu aprobación manda.</p>
+          <span class="proc-time" id="proc-3-time">⏱ Día 10–12</span>
+        </div>
+      </div>
+      <div class="proc sr sr-d1">
+        <div class="proc-num">04</div>
+        <div class="proc-body">
+          <h3 id="proc-4-title">Integración y lanzamiento</h3>
+          <p id="proc-4-desc">Configuramos pagos, WhatsApp, correos y herramientas de medición. El sitio se publica en tu dominio y quedas con acceso total.</p>
+          <span class="proc-time" id="proc-4-time">⏱ Día 13–15 🚀</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PRECIOS ════ -->
+<section id="precios" class="section section-alt">
+  <div class="container">
+    <div class="pricing-header sr">
+      <div>
+        <div class="section-eyebrow"><span class="tag" id="price-tag">Precios</span></div>
+        <h2 class="s-title" id="price-title" style="margin-bottom:0">Planes para cada<br>tipo de negocio.</h2>
+      </div>
+      <p id="price-sub" style="font-size:14px;color:var(--gray);max-width:320px;line-height:1.7">Sin costo mensual obligatorio. Pago único, el sitio es tuyo para siempre.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- PLAN 1: Web de Servicios -->
+      <div class="price-card sr">
+        <div class="pc-top" style="background:linear-gradient(135deg,#2196F3,#42A5F5);position:relative;overflow:hidden;">
+          <div style="position:absolute;top:10px;right:-8px;background:#4CAF50;color:#fff;font-size:9px;font-weight:800;letter-spacing:1.5px;padding:4px 28px 4px 12px;transform:rotate(0deg);border-radius:3px;text-transform:uppercase;">BASE</div>
+          <div class="pc-name" style="color:#fff;font-size:1rem;margin-bottom:6px;">Web de Servicios</div>
+          <div style="display:flex;align-items:baseline;gap:4px;">
+            <span style="font-family:var(--ff);font-size:1.1rem;color:#fff;font-weight:400;">$</span>
+            <span style="font-family:var(--ffd);font-size:3rem;color:#fff;font-weight:800;line-height:1;">280.000</span>
+          </div>
+          <div class="pc-period" style="color:rgba(255,255,255,.8);margin-top:4px;">+ IVA</div>
+        </div>
+        <div class="pc-body">
+          <ul class="pc-feats">
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Diseño web</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Dominio (Gratis)*</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Hosting (Gratis)*</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Botón de WhatsApp</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>3 Correos Corporativos</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Certificado SSL</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Posicionamiento SEO</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Sin costo Mensual</li>
+          </ul>
+          <a href="https://wa.me/56990819450?text=Hola%2C%20quiero%20contratar%20el%20plan%20Web%20de%20Servicios%20con%20InnovaStudio." target="_blank" class="pc-cta" style="background:linear-gradient(90deg,#2196F3,#42A5F5);color:#fff;display:block;text-align:center;padding:13px;border-radius:6px;font-weight:700;font-size:13px;letter-spacing:.5px;">CONTACTO</a>
+        </div>
+      </div>
+
+      <!-- PLAN 2: Ecommerce (destacado) -->
+      <div class="price-card hot sr sr-d1">
+        <div class="pc-top" style="background:linear-gradient(135deg,#1976D2,#2196F3);position:relative;overflow:hidden;">
+          <div style="position:absolute;top:10px;right:-8px;background:#FFC107;color:#fff;font-size:9px;font-weight:800;letter-spacing:1.5px;padding:4px 28px 4px 12px;border-radius:3px;text-transform:uppercase;">EXTRA</div>
+          <div class="pc-name" style="color:#fff;font-size:1rem;margin-bottom:6px;">Ecommerce</div>
+          <div style="display:flex;align-items:baseline;gap:4px;">
+            <span style="font-family:var(--ff);font-size:1.1rem;color:#fff;font-weight:400;">$</span>
+            <span style="font-family:var(--ffd);font-size:3rem;color:#fff;font-weight:800;line-height:1;">300.000</span>
+          </div>
+          <div class="pc-period" style="color:rgba(255,255,255,.8);margin-top:4px;">+ IVA</div>
+        </div>
+        <div class="pc-body">
+          <ul class="pc-feats">
+            <li class="pc-feat" style="color:rgba(255,255,255,.85)"><span style="color:#A5B4FC;font-weight:700;flex-shrink:0;">✓</span>Diseño web</li>
+            <li class="pc-feat" style="color:rgba(255,255,255,.85)"><span style="color:#A5B4FC;font-weight:700;flex-shrink:0;">✓</span>Dominio (Gratis)*</li>
+            <li class="pc-feat" style="color:rgba(255,255,255,.85)"><span style="color:#A5B4FC;font-weight:700;flex-shrink:0;">✓</span>Hosting (Gratis)*</li>
+            <li class="pc-feat" style="color:rgba(255,255,255,.85)"><span style="color:#A5B4FC;font-weight:700;flex-shrink:0;">✓</span>Botón de WhatsApp</li>
+            <li class="pc-feat" style="color:rgba(255,255,255,.85)"><span style="color:#A5B4FC;font-weight:700;flex-shrink:0;">✓</span>3 Correos Corporativos</li>
+            <li class="pc-feat" style="color:rgba(255,255,255,.85)"><span style="color:#A5B4FC;font-weight:700;flex-shrink:0;">✓</span>Certificado SSL</li>
+            <li class="pc-feat" style="color:rgba(255,255,255,.85)"><span style="color:#A5B4FC;font-weight:700;flex-shrink:0;">✓</span>Posicionamiento SEO</li>
+            <li class="pc-feat" style="color:rgba(255,255,255,.85)"><span style="color:#A5B4FC;font-weight:700;flex-shrink:0;">✓</span>Sin costo Mensual</li>
+            <li class="pc-feat" style="color:rgba(255,255,255,.85)"><span style="color:#A5B4FC;font-weight:700;flex-shrink:0;">✓</span>Carro de compra (Webpay, Flow)</li>
+          </ul>
+          <a href="https://wa.me/56990819450?text=Hola%2C%20quiero%20contratar%20el%20plan%20Ecommerce%20con%20InnovaStudio." target="_blank" class="pc-cta lime" style="display:block;text-align:center;padding:13px;border-radius:6px;font-weight:700;font-size:13px;letter-spacing:.5px;">CONTACTO</a>
+        </div>
+      </div>
+
+      <!-- PLAN 3: Ecommerce Full -->
+      <div class="price-card sr sr-d2">
+        <div class="pc-top" style="background:linear-gradient(135deg,#2196F3,#42A5F5);position:relative;overflow:hidden;">
+          <div style="position:absolute;top:10px;right:-8px;background:#F44336;color:#fff;font-size:9px;font-weight:800;letter-spacing:1.5px;padding:4px 28px 4px 12px;border-radius:3px;text-transform:uppercase;">FULL</div>
+          <div class="pc-name" style="color:#fff;font-size:1rem;margin-bottom:6px;">Ecommerce Full</div>
+          <div style="display:flex;align-items:baseline;gap:4px;">
+            <span style="font-family:var(--ff);font-size:1.1rem;color:#fff;font-weight:400;">$</span>
+            <span style="font-family:var(--ffd);font-size:3rem;color:#fff;font-weight:800;line-height:1;">350.000</span>
+          </div>
+          <div class="pc-period" style="color:rgba(255,255,255,.8);margin-top:4px;">+ IVA</div>
+        </div>
+        <div class="pc-body">
+          <ul class="pc-feats">
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Diseño web</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Dominio (Gratis)*</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Hosting (Gratis)*</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Botón de WhatsApp</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>6 Correos Corporativos</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Certificado SSL</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Posicionamiento SEO</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Sin costo Mensual</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Carro de compra (Webpay, Flow)</li>
+            <li class="pc-feat"><span class="pc-feat-check">✓</span>Módulo de despacho</li>
+          </ul>
+          <a href="https://wa.me/56990819450?text=Hola%2C%20quiero%20contratar%20el%20plan%20Ecommerce%20Full%20con%20InnovaStudio." target="_blank" class="pc-cta" style="background:linear-gradient(90deg,#2196F3,#42A5F5);color:#fff;display:block;text-align:center;padding:13px;border-radius:6px;font-weight:700;font-size:13px;letter-spacing:.5px;">CONTACTO</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════ TESTIMONIOS ════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header center sr">
+      <div class="section-eyebrow" style="justify-content:center"><span class="tag" id="test-tag">Clientes</span></div>
+      <h2 class="s-title" id="test-title">Resultados reales</h2>
+      <p class="s-sub" id="test-sub">Lo que dicen quienes ya tienen su sitio web funcionando.</p>
+    </div>
+
+    <div class="test-grid">
+      <div class="test-card sr">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Desde que lanzamos el sitio, las reservas online representan el 60% de nuestra agenda mensual. El carro de compra con Webpay fue lo que marcó la diferencia."</p>
+        <div class="test-author">
+          <div class="test-av">C</div>
+          <div>
+            <div class="test-name">Dr. Carlos Vega</div>
+            <div class="test-role">CLÍNICA DENTAL · CASTRO, CHILOÉ</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card sr sr-d1">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Entregaron en 12 días, no en 15. El diseño superó lo que esperaba y el proceso fue completamente ordenado. Comunicación impecable en cada etapa."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:#4338CA">M</div>
+          <div>
+            <div class="test-name">Marcela Ríos</div>
+            <div class="test-role">DISEÑO WEB · CASTRO, CHILOÉ</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card sr sr-d2">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"El bot de WhatsApp que me configuraron atiende consultas a las 3 AM. Mi equipo llega en la mañana y hay citas agendadas listas para confirmar. Increíble."</p>
+        <div class="test-author">
+          <div class="test-av" style="background:#1D4ED8">A</div>
+          <div>
+            <div class="test-name">Andrés Molina</div>
+            <div class="test-role">EMPRENDIMIENTO · CHILOÉ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CTA FINAL ════ -->
+<section id="contacto" class="cta-final">
+  <div class="container">
+    <div class="cta-inner sr">
+      <h2 id="cta-title">¿Lanzamos tu sitio<br>esta <em>semana</em>?</h2>
+      <p id="cta-sub">Escríbenos hoy, reunión mañana, sitio online en 15 días. Sin vueltas.</p>
+      <div class="cta-btns">
+        <a href="https://wa.me/56990819450?text=Hola%20InnovaStudio%2C%20quiero%20cotizar%20mi%20sitio%20web." target="_blank" class="btn btn-lime btn-lg" id="cta-btn1">💬 Escribir por WhatsApp</a>
+        <a href="mailto:contacto@innovastudiomarketing.cl?subject=Quiero%20cotizar%20mi%20sitio%20web&body=Hola%2C%20vi%20InnovaStudio%20y%20quiero%20una%20cotización." class="btn btn-ghost btn-lg" id="cta-btn2">✉️ Enviar correo</a>
+      </div>
+      <div class="cta-trust">
+        <div class="ct" id="cta-trust1">Entrega en 15 días</div>
+        <div class="ct" id="cta-trust2">Sin mensualidad forzada</div>
+        <div class="ct" id="cta-trust3">Garantía de satisfacción</div>
+        <div class="ct" id="cta-trust4">Soporte 30 días incluido</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">InnovaStudio<span style="color:var(--lime)">.</span></div>
+      <div class="footer-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#precios">Precios</a>
+        <a href="mailto:contacto@innovastudiomarketing.cl">Contacto</a>
+      </div>
+      <div class="footer-copy">© <span id="yr"></span> INNOVASTUDIO · SANTIAGO, CHILE</div>
+    </div>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<div class="wa-float">
+  <div class="wa-tooltip">¡Escríbenos ahora! 👋</div>
+  <div style="position:relative">
+    <div class="wa-ring"></div>
+    <a class="wa-btn" href="https://wa.me/56990819450?text=Hola%20InnovaStudio%2C%20quiero%20cotizar%20mi%20sitio%20web." target="_blank">💬</a>
+  </div>
+</div>
+
+<!-- ════ JS ════ -->
+<script>
+/* cursor: browser default */
+
+/* NAV */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>60);
+});
+
+/* MOBILE */
+function openMob(){document.getElementById('mobMenu').classList.add('open');document.body.style.overflow='hidden'}
+function closeMob(){document.getElementById('mobMenu').classList.remove('open');document.body.style.overflow=''}
+
+/* SCROLL REVEAL */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.1});
+document.querySelectorAll('.sr').forEach(el=>io.observe(el));
+
+/* TABS */
+function setTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* STEP ACCORDION */
+function toggleStep(head){
+  const card=head.parentElement;
+  const wasOpen=card.classList.contains('open');
+  card.closest('.step-list').querySelectorAll('.step-card').forEach(c=>c.classList.remove('open'));
+  if(!wasOpen) card.classList.add('open');
+}
+
+/* CHECKLIST */
+let checked=0;
+function toggleCheck(item){
+  item.classList.toggle('checked');
+  const check=item.querySelector('.cl-check');
+  check.textContent=item.classList.contains('checked')?'✓':'';
+  checked=document.querySelectorAll('.cl-item.checked').length;
+  const total=document.querySelectorAll('.cl-item').length;
+  document.getElementById('progressText').textContent=checked+' / '+total+' completados';
+  document.getElementById('progressBar2').style.width=(checked/total*100)+'%';
+  // Also update global progress bar
+  document.getElementById('progressBar2').style.background=checked===total?'#22c55e':'var(--lime)';
+}
+
+/* YEAR */
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+
+</script>
+</body>
+</html>
